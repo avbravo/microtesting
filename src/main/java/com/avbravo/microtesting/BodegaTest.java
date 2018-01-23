@@ -39,6 +39,8 @@ public class BodegaTest {
     @PostConstruct
     void init() {
         unitTest.start(BodegaTest.class);
+        
+        save();
         findAll();
 
     }
@@ -66,7 +68,9 @@ public class BodegaTest {
 
     @Test
     private void findAll() {
-        unitTest.assertNotEquals("findAll", 0, bodegaRepository.findAll().size());
+ 
+    unitTest.assertNotEquals("findAll", 0, bodegaRepository.findAll().size());
+ 
 
     }
 
