@@ -10,6 +10,7 @@ import com.avbravo.jmoordbunit.anotation.Report;
 import com.avbravo.jmoordbunit.anotation.Test;
 import com.avbravo.jmoordbunit.test.UnitTest;
 import com.avbravo.microtestingejb.entity.Bodega;
+import com.avbravo.microtestingejb.entity.Color;
 import com.avbravo.microtestingejb.repository.BodegaRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class BodegaTest {
     UnitTest unitTest;
     @Inject
     BodegaRepository bodegaRepository;
-
+    
     @PostConstruct
     void init() {
         unitTest.start(BodegaTest.class);
@@ -48,6 +49,7 @@ public class BodegaTest {
     @Test
     private void save() {
         try {
+            
             //Mock
             Bodega bodega = new Bodega();
             bodega.setIdbodega("bodega-test");
