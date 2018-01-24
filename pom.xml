@@ -39,8 +39,8 @@
     </dependencies>
 
     <build>
-        <!--<finalName>microtesting</finalName>-->
-   <finalName>${project.name}-testing</finalName>
+      <finalName>microtesting</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
