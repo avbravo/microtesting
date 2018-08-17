@@ -31,8 +31,13 @@
             <artifactId>microtestingejb</artifactId>
             <version>0.1</version>
         </dependency>
-          <dependency>
+<!--          <dependency>
                <groupId>${project.groupId}</groupId>
+               <artifactId>jmoordbunit</artifactId>
+               <version>0.4.1</version>
+          </dependency>-->
+          <dependency>
+               <groupId>com.github.avbravo</groupId>
                <artifactId>jmoordbunit</artifactId>
                <version>0.4.1</version>
           </dependency>
@@ -101,5 +106,11 @@
             <layout>default</layout>
             <name>Repository for library PrimeFaces-maven-lib</name>
         </repository>
+      
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
+
 </project>
