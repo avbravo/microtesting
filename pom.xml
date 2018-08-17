@@ -12,13 +12,14 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.payara.micro>5.182</version.payara.micro>
     </properties>
     
     <dependencies>
         <dependency>
             <groupId>com.github.avbravo</groupId>
             <artifactId>jmoordbunit</artifactId>
-            <version>0.3.1</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
@@ -57,7 +58,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.6</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -86,6 +87,24 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>fish.payara.maven.plugins</groupId>
+                <artifactId>payara-micro-maven-plugin</artifactId>
+                <configuration>
+                    <payaraVersion>${version.payara.micro}</payaraVersion>
+                    <deployWar>false</deployWar>
+                    <commandLineOptions>
+                        <option>
+                            <key>--autoBindHttp</key>
+                        </option>
+                        <option>
+                            <key>--deploy</key>
+                            <value>${project.build.directory}/${project.build.finalName}</value>
+                        </option>
+                    </commandLineOptions>
+                </configuration>
+                <version>1.0.1</version>
             </plugin>
         </plugins>
     </build>
