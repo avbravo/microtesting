@@ -9,8 +9,8 @@ import com.avbravo.ejbjmoordb.pojos.UserInfo;
 import com.avbravo.jmoordbunit.anotation.Report;
 import com.avbravo.jmoordbunit.anotation.Test;
 import com.avbravo.jmoordbunit.test.UnitTest;
+
 import com.avbravo.microtestingejb.entity.Bodega;
-import com.avbravo.microtestingejb.entity.Color;
 import com.avbravo.microtestingejb.repository.BodegaRepository;
 import java.util.ArrayList;
 import java.util.List;

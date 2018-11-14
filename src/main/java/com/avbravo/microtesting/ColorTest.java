@@ -15,7 +15,6 @@ import com.avbravo.jmoordbunit.htmlcomponents.Item;
 import com.avbravo.jmoordbunit.htmlcomponents.Radio;
 import com.avbravo.jmoordbunit.htmlcomponents.SelectOneMenu;
 import com.avbravo.jmoordbunit.test.UnitTest;
-import com.avbravo.jmoordbunit.view.UnitView;
 import com.avbravo.microtestingejb.entity.Color;
 import com.avbravo.microtestingejb.repository.ColorRepository;
 import java.util.ArrayList;
@@ -40,15 +39,14 @@ public class ColorTest {
 
     @Inject
     UnitTest unitTest;
-    @Inject
-    UnitView unitView;
+   
     @Inject
     ColorRepository colorRepository;
 
     @PostConstruct
     void init() {
         unitTest.start(ColorTest.class);
-        unitView.start(ColorTest.class);
+        unitTest.start(ColorTest.class);
         save();
         panelSelectOneMenu();
         panelDataTable();
@@ -80,19 +78,19 @@ public class ColorTest {
                 /*
             Dibuja la interfaz
                  */
-                unitView.form();
-                unitView.formTitle("Registros de colores");
-                unitView.panel();
+                unitTest.form();
+                unitTest.formTitle("Registros de colores");
+                unitTest.panel();
 
-                unitView.panelAddInputText(Arrays.asList(new InputText("idcolor", color.getIdcolor()),
+                unitTest.panelAddInputText(Arrays.asList(new InputText("idcolor", color.getIdcolor()),
                         new InputText("activo", color.getActivo())
                 ));
 
-                unitView.panelClose();
-                unitView.buttonGreen("Save");
-                unitView.formClose();
+                unitTest.panelClose();
+                unitTest.buttonGreen("Save");
+                unitTest.formClose();
 
-                unitView.errorMessage("No se pudo guardar");
+                unitTest.errorMessage("No se pudo guardar");
 
             }
 
@@ -114,23 +112,23 @@ public class ColorTest {
             Dibuja la interfaz
                  */
 
-                unitView.form();
-                unitView.formTitle("panelSelectOneMenu()");
-                unitView.panel();
+                unitTest.form();
+                unitTest.formTitle("panelSelectOneMenu()");
+                unitTest.panel();
 
                 //-----------------------------
                 List<Item> itemList = new ArrayList<>();
                 colorList.stream().map((c) -> new Item(c.getIdcolor(), c.getIdcolor(), c.getIdcolor())).forEachOrdered((item) -> {
                     itemList.add(item);
                 });
-                unitView.panelAddSelectOneMenu(
+                unitTest.panelAddSelectOneMenu(
                         Arrays.asList(new SelectOneMenu("color", itemList)));
 
-                unitView.panelClose();
+                unitTest.panelClose();
 
-                unitView.formClose();
+                unitTest.formClose();
             } else {
-                unitView.errorMessage("No tiene registros");
+                unitTest.errorMessage("No tiene registros");
             }
 
         } catch (Exception e) {
@@ -147,19 +145,19 @@ public class ColorTest {
             /*
             Dibuja la interfaz
              */
-            unitView.form();
-            unitView.formTitle("panelDataTable()");
-            unitView.panel();
+            unitTest.form();
+            unitTest.formTitle("panelDataTable()");
+            unitTest.panel();
 
-            unitView.panelAddTableHeader("colores", Arrays.asList(new RowView("idcolor"), new RowView("activo")));
+            unitTest.panelAddTableHeader("colores", Arrays.asList(new RowView("idcolor"), new RowView("activo")));
             colorRepository.findAll().forEach((c) -> {
-                unitView.panelAddTableCol(Arrays.asList(new ColView(c.getIdcolor()), new ColView(c.getActivo())));
+                unitTest.panelAddTableCol(Arrays.asList(new ColView(c.getIdcolor()), new ColView(c.getActivo())));
             });
-            unitView.panelAddTableClose();
+            unitTest.panelAddTableClose();
 
-            unitView.panelClose();
+            unitTest.panelClose();
 
-            unitView.formClose();
+            unitTest.formClose();
 
         } catch (Exception e) {
             System.out.println("panelDataTable() " + e.getLocalizedMessage());
@@ -176,19 +174,19 @@ public class ColorTest {
             Boolean found = unitTest.assertFalse("radio()", colorList.isEmpty());
             if (found) {
 
-                unitView.form();
-                unitView.formTitle("Radio");
-                unitView.panel();
+                unitTest.form();
+                unitTest.formTitle("Radio");
+                unitTest.panel();
 
-                unitView.panelAddRadio(Arrays.asList(new Radio("sexo",
+                unitTest.panelAddRadio(Arrays.asList(new Radio("sexo",
                         Arrays.asList(new Item("sexo", "Masculino", "Masculino"),
                                 new Item("sexo", "Femenino", "Femenino")))));
 
-                unitView.panelClose();
-                unitView.formClose();
+                unitTest.panelClose();
+                unitTest.formClose();
 
             } else {
-                unitView.errorMessage("No tiene registros");
+                unitTest.errorMessage("No tiene registros");
             }
 
         } catch (Exception e) {
@@ -205,18 +203,18 @@ public class ColorTest {
             Boolean found = unitTest.assertFalse("checkbox()", colorList.isEmpty());
             if (found) {
 
-                unitView.form();
-                unitView.formTitle("Checkbox");
-                unitView.panel();
+                unitTest.form();
+                unitTest.formTitle("Checkbox");
+                unitTest.panel();
 
-                unitView.panelAddCheckbox("sexo", Arrays.asList(new Checkbox("masculino", "Masculino", "Masculino"),
+                unitTest.panelAddCheckbox("sexo", Arrays.asList(new Checkbox("masculino", "Masculino", "Masculino"),
                         new Checkbox("femenino", "Femenino", "Femenino")));
 
-                unitView.panelClose();
-                unitView.formClose();
+                unitTest.panelClose();
+                unitTest.formClose();
 
             } else {
-                unitView.errorMessage("No tiene registros");
+                unitTest.errorMessage("No tiene registros");
             }
 
         } catch (Exception e) {
@@ -235,15 +233,15 @@ public class ColorTest {
                 /*
             Dibuja la interfaz
                  */
-                unitView.form();
-                unitView.formTitle("allComponents()");
-                unitView.panel();
+                unitTest.form();
+                unitTest.formTitle("allComponents()");
+                unitTest.panel();
 
                 //-- Formulario
                 Color color = new Color();
                 color = colorList.get(0);
                
-                unitView.panelAddInputText(Arrays.asList(new InputText("idcolor", color.getIdcolor()),
+                unitTest.panelAddInputText(Arrays.asList(new InputText("idcolor", color.getIdcolor()),
                         new InputText("activo", color.getActivo())));
 
                 //-- SelectOneMenu
@@ -251,37 +249,37 @@ public class ColorTest {
                 colorList.stream().map((c) -> new Item(c.getIdcolor(), c.getIdcolor(), c.getIdcolor())).forEachOrdered((item) -> {
                     itemList.add(item);
                 });
-                unitView.panelAddSelectOneMenu(
+                unitTest.panelAddSelectOneMenu(
                         Arrays.asList(new SelectOneMenu("color", itemList)));
 
                 //-- Tabla
-                unitView.panelAddTableHeader("colores", Arrays.asList(new RowView("idcolor"), new RowView("activo")));
+                unitTest.panelAddTableHeader("colores", Arrays.asList(new RowView("idcolor"), new RowView("activo")));
                 colorRepository.findAll().forEach((c) -> {
-                    unitView.panelAddTableCol(Arrays.asList(new ColView(c.getIdcolor()), new ColView(c.getActivo())));
+                    unitTest.panelAddTableCol(Arrays.asList(new ColView(c.getIdcolor()), new ColView(c.getActivo())));
                 });
-                unitView.panelAddTableClose();
-                    unitView.panelClose();
+                unitTest.panelAddTableClose();
+                    unitTest.panelClose();
                 
                     //-- Otra fila
-                     unitView.panel();
+                     unitTest.panel();
                     //-- Radio
                     
-                unitView.panelAddRadio(Arrays.asList(new Radio("sexo",
+                unitTest.panelAddRadio(Arrays.asList(new Radio("sexo",
                         Arrays.asList(new Item("sexo", "Masculino", "Masculino"),
                                 new Item("sexo", "Femenino", "Femenino")))));
 
                     //-- CheckBox
                     
-                      unitView.panelAddCheckbox("sexo", Arrays.asList(new Checkbox("masculino", "Masculino", "Masculino"),
+                      unitTest.panelAddCheckbox("sexo", Arrays.asList(new Checkbox("masculino", "Masculino", "Masculino"),
                         new Checkbox("femenino", "Femenino", "Femenino")));
 
-                  unitView.panelClose();
+                  unitTest.panelClose();
 
             
            
-                unitView.formClose();
+                unitTest.formClose();
             } else {
-                unitView.errorMessage("No tiene registros");
+                unitTest.errorMessage("No tiene registros");
             }
 
         } catch (Exception e) {
