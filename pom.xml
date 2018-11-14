@@ -15,7 +15,7 @@
         <version.payara.micro>5.182</version.payara.micro>
     </properties>
     
-     <dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
@@ -24,24 +24,24 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.1</version>
+            <version>6.2</version>
         </dependency>
         <dependency>
             <groupId>com.avbravo</groupId>
             <artifactId>microtestingejb</artifactId>
             <version>0.1</version>
         </dependency>
-<!--          <dependency>
-               <groupId>${project.groupId}</groupId>
-               <artifactId>jmoordbunit</artifactId>
-               <version>0.4.1</version>
-          </dependency>-->
-          <dependency>
-               <groupId>com.github.avbravo</groupId>
-               <artifactId>jmoordbunit</artifactId>
-               <version>0.4.1</version>
-          </dependency>
-          <dependency>
+        <!--          <dependency>
+             <groupId>${project.groupId}</groupId>
+             <artifactId>jmoordbunit</artifactId>
+             <version>0.4.1</version>
+        </dependency>-->
+        <dependency>
+            <groupId>com.github.avbravo</groupId>
+            <artifactId>jmoordbunit</artifactId>
+            <version>0.4.2</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>8.0</version>
@@ -96,6 +96,24 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>fish.payara.maven.plugins</groupId>
+                <artifactId>payara-micro-maven-plugin</artifactId>
+                <configuration>
+                    <payaraVersion>${version.payara.micro}</payaraVersion>
+                    <deployWar>false</deployWar>
+                    <commandLineOptions>
+                        <option>
+                            <key>--autoBindHttp</key>
+                        </option>
+                        <option>
+                            <key>--deploy</key>
+                            <value>${project.build.directory}/${project.build.finalName}</value>
+                        </option>
+                    </commandLineOptions>
+                </configuration>
+                <version>1.0.1</version>
             </plugin>
         </plugins>
     </build>

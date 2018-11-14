@@ -34,7 +34,8 @@ import javax.inject.Inject;
  */
 @Startup
 @Singleton
-@DependsOn("TestEnvironment")
+@DependsOn("BodegaTest")
+@Test
 public class ColorTest {
 
     @Inject
@@ -54,7 +55,7 @@ public class ColorTest {
         radio();
         checkbox();
         allComponents();
-
+  unitTest.terminate();
     }
 
     @PreDestroy
