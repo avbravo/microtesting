@@ -8,6 +8,7 @@ package com.avbravo.microtesting;
 import com.avbravo.ejbjmoordb.pojos.UserInfo;
 import com.avbravo.jmoordbunit.anotation.Report;
 import com.avbravo.jmoordbunit.anotation.Test;
+import com.avbravo.jmoordbunit.interfaces.ITest;
 import com.avbravo.jmoordbunit.test.UnitTest;
 
 import com.avbravo.microtestingejb.entity.Bodega;
@@ -30,7 +31,7 @@ import javax.inject.Inject;
 @DependsOn("TestEnvironment")
 @Test
 @Report(path = "/home/avbravo/Descargas/")
-public class BodegaTest {
+public class BodegaTest implements ITest{
 
     @Inject
     UnitTest unitTest;
@@ -38,7 +39,8 @@ public class BodegaTest {
     BodegaRepository bodegaRepository;
     
     @PostConstruct
-    void init() {
+    @Override
+    public void init() {
         unitTest.start(BodegaTest.class);
         
         save();
@@ -61,9 +63,9 @@ public class BodegaTest {
             bodega.setUserInfo(list);
             bodega.setActivo("si");
             
-            unitTest.assertEquals("save()", true,bodegaRepository.save(bodega));
+            unitTest.assertEquals(nameOfMethod(), true,bodegaRepository.save(bodega));
         } catch (Exception e) {
-            System.out.println("save() " + e.getLocalizedMessage());
+            System.out.println(nameOfMethod() + e.getLocalizedMessage());
         }
 
     }
@@ -71,12 +73,13 @@ public class BodegaTest {
     @Test
     private void findAll() {
  
-    unitTest.assertNotEquals("findAll", 0, bodegaRepository.findAll().size());
+    unitTest.assertNotEquals(nameOfMethod(), 0, bodegaRepository.findAll().size());
  
 
     }
 
     @PreDestroy
+    @Override
     public void destroy() {
         unitTest.end(BodegaTest.class);
     }

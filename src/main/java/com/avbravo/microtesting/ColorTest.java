@@ -14,6 +14,7 @@ import com.avbravo.jmoordbunit.htmlcomponents.InputText;
 import com.avbravo.jmoordbunit.htmlcomponents.Item;
 import com.avbravo.jmoordbunit.htmlcomponents.Radio;
 import com.avbravo.jmoordbunit.htmlcomponents.SelectOneMenu;
+import com.avbravo.jmoordbunit.interfaces.ITest;
 import com.avbravo.jmoordbunit.test.UnitTest;
 import com.avbravo.microtestingejb.entity.Color;
 import com.avbravo.microtestingejb.repository.ColorRepository;
@@ -35,16 +36,17 @@ import javax.inject.Inject;
 @Singleton
 @DependsOn("BodegaTest")
 @Test
-public class ColorTest {
+public class ColorTest implements ITest {
 
     @Inject
     UnitTest unitTest;
-   
+
     @Inject
     ColorRepository colorRepository;
 
     @PostConstruct
-    void init() {
+    @Override
+    public void init() {
         unitTest.start(ColorTest.class);
         unitTest.start(ColorTest.class);
         save();
@@ -53,10 +55,14 @@ public class ColorTest {
         radio();
         checkbox();
         allComponents();
-  unitTest.terminate();
+        unitTest.terminate();
     }
 
+    /**
+     *
+     */
     @PreDestroy
+    @Override
     public void destroy() {
         unitTest.end(ColorTest.class);
     }
@@ -95,7 +101,7 @@ public class ColorTest {
             }
 
         } catch (Exception e) {
-            System.out.println("save() " + e.getLocalizedMessage());
+            System.out.println(nameOfMethod() + e.getLocalizedMessage());
         }
 
         return "";
@@ -106,7 +112,7 @@ public class ColorTest {
         try {
 
             List<Color> colorList = colorRepository.findAll();
-            Boolean found = unitTest.assertFalse("panelSelectOneMenu()", colorList.isEmpty());
+            Boolean found = unitTest.assertFalse(nameOfMethod(), colorList.isEmpty());
             if (found) {
                 /*
             Dibuja la interfaz
@@ -132,7 +138,7 @@ public class ColorTest {
             }
 
         } catch (Exception e) {
-            System.out.println("panelSelectOneMenu() " + e.getLocalizedMessage());
+            System.out.println(nameOfMethod()+" " + e.getLocalizedMessage());
         }
 
         return "";
@@ -160,7 +166,7 @@ public class ColorTest {
             unitTest.formClose();
 
         } catch (Exception e) {
-            System.out.println("panelDataTable() " + e.getLocalizedMessage());
+            System.out.println(nameOfMethod()+" " + e.getLocalizedMessage());
         }
 
         return "";
@@ -171,7 +177,7 @@ public class ColorTest {
         try {
             //titulo de la tabla
             List<Color> colorList = colorRepository.findAll();
-            Boolean found = unitTest.assertFalse("radio()", colorList.isEmpty());
+            Boolean found = unitTest.assertFalse(nameOfMethod(), colorList.isEmpty());
             if (found) {
 
                 unitTest.form();
@@ -200,7 +206,7 @@ public class ColorTest {
         try {
             //titulo de la tabla
             List<Color> colorList = colorRepository.findAll();
-            Boolean found = unitTest.assertFalse("checkbox()", colorList.isEmpty());
+            Boolean found = unitTest.assertFalse(nameOfMethod(), colorList.isEmpty());
             if (found) {
 
                 unitTest.form();
@@ -218,7 +224,7 @@ public class ColorTest {
             }
 
         } catch (Exception e) {
-            System.out.println("checkbox() " + e.getLocalizedMessage());
+                 System.out.println(nameOfMethod()+" " + e.getLocalizedMessage());
         }
         return "";
     }
@@ -228,7 +234,7 @@ public class ColorTest {
         try {
             List<Color> colorList = colorRepository.findAll();
 
-            Boolean found = unitTest.assertFalse("allComponents()", colorList.isEmpty());
+            Boolean found = unitTest.assertFalse(nameOfMethod(), colorList.isEmpty());
             if (found) {
                 /*
             Dibuja la interfaz
@@ -240,7 +246,7 @@ public class ColorTest {
                 //-- Formulario
                 Color color = new Color();
                 color = colorList.get(0);
-               
+
                 unitTest.panelAddInputText(Arrays.asList(new InputText("idcolor", color.getIdcolor()),
                         new InputText("activo", color.getActivo())));
 
@@ -258,32 +264,29 @@ public class ColorTest {
                     unitTest.panelAddTableCol(Arrays.asList(new ColView(c.getIdcolor()), new ColView(c.getActivo())));
                 });
                 unitTest.panelAddTableClose();
-                    unitTest.panelClose();
-                
-                    //-- Otra fila
-                     unitTest.panel();
-                    //-- Radio
-                    
+                unitTest.panelClose();
+
+                //-- Otra fila
+                unitTest.panel();
+                //-- Radio
+
                 unitTest.panelAddRadio(Arrays.asList(new Radio("sexo",
                         Arrays.asList(new Item("sexo", "Masculino", "Masculino"),
                                 new Item("sexo", "Femenino", "Femenino")))));
 
-                    //-- CheckBox
-                    
-                      unitTest.panelAddCheckbox("sexo", Arrays.asList(new Checkbox("masculino", "Masculino", "Masculino"),
+                //-- CheckBox
+                unitTest.panelAddCheckbox("sexo", Arrays.asList(new Checkbox("masculino", "Masculino", "Masculino"),
                         new Checkbox("femenino", "Femenino", "Femenino")));
 
-                  unitTest.panelClose();
+                unitTest.panelClose();
 
-            
-           
                 unitTest.formClose();
             } else {
                 unitTest.errorMessage("No tiene registros");
             }
 
         } catch (Exception e) {
-            System.out.println("save() " + e.getLocalizedMessage());
+                  System.out.println(nameOfMethod()+" " + e.getLocalizedMessage());
         }
 
         return "";
