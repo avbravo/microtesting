@@ -48,7 +48,6 @@ public class ColorTest implements ITest {
     @Override
     public void init() {
         unitTest.start(ColorTest.class);
-        unitTest.start(ColorTest.class);
         save();
         panelSelectOneMenu();
         panelDataTable();
