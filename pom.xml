@@ -4,7 +4,7 @@
 
     <groupId>com.avbravo</groupId>
     <artifactId>microtesting</artifactId>
-    <version>0.1</version>
+    <version>0.1.1</version>
     <packaging>war</packaging>
 
     <name>microtesting</name>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.avbravo</groupId>
             <artifactId>microtestingejb</artifactId>
-            <version>0.1</version>
+            <version>0.1.1</version>
         </dependency>
         <!--          <dependency>
              <groupId>${project.groupId}</groupId>

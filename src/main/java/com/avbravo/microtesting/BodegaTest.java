@@ -5,7 +5,7 @@
  */
 package com.avbravo.microtesting;
 
-import com.avbravo.ejbjmoordb.pojos.UserInfo;
+import com.avbravo.jmoordb.pojos.UserInfo;
 import com.avbravo.jmoordbunit.anotation.Report;
 import com.avbravo.jmoordbunit.anotation.Test;
 import com.avbravo.jmoordbunit.interfaces.ITest;
